@@ -1,0 +1,58 @@
+The folowing will allow you to run a Dashboard in Jupyter notebooks
+
+Later include this code in top cell 
+
+!pip install dash==1.19.0  
+
+!pip install jupyter_dash 
+
+!pip install --upgrade plotly
+
+import pandas as pd
+import dash
+import dash_html_components as html
+import dash_core_components as dcc
+from dash.dependencies import Input, Output
+from jupyter_dash import JupyterDash
+import plotly.graph_objects as go
+
+Further you need to change 
+
+app=dash.Dash(__name__)
+
+as
+
+app = JupyterDash(__name__)
+
+Change your last line
+
+if __name__ == '__main__':
+    app.run_server()
+
+as
+
+if __name__ == '__main__':
+    app.run_server(port = 8090 ,dev_tools_ui=True, #debug=True,
+              dev_tools_hot_reload =True, threaded=True)
+
+This is the url of the spacex_launch_dash.csv
+
+ dataset
+
+https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/spacex_launch_dash.csv
+
+In the spacex_dash_app.py replace the line
+
+spacex_df = pd.read_csv("spacex_launch_dash.csv")
+
+as
+
+spacex_df = pd.read_csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/spacex_launch_dash.csv")
+
+Make these changes execute your code
+
+Later in browser use the url
+
+http://localhost:8090
+
+Whenever you make changes to your code and want to rerun it  close the running instance, shutdown the kernel and restart the kernel and rerun the cells.
